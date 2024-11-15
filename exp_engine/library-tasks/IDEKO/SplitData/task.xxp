@@ -1,0 +1,23 @@
+task SplitData {
+
+    define input data XPad;
+    define input data YPad;
+
+    define output data Timestamps41;
+    define output data Features;
+    define output data XTrain;
+    define output data XTest;
+    define output data YTrain;
+    define output data YTest;
+    define output data XPad;
+    define output data YPad;
+
+    implementation "IDEKO/SplitData/task.py";
+    
+    define param split_percentage {
+        type Integer;
+        default 70;
+        // MA: let's have the range as the following
+        range [50,90];
+    }
+}

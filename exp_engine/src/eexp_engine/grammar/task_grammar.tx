@@ -1,0 +1,40 @@
+Root:
+        component*=Component
+;
+
+Component:  Task;
+
+Task:
+    'task' name=ID '{'
+        elements*=Element
+    '}'
+;
+
+Element:  InputData | OutputData | Metric | Implementation | VirtualEnv |  PythonVersion | Parameter | Comment;
+
+InputData: 'define input data' name=ID ';' ;
+
+OutputData: 'define output data' name=ID ';' ;
+
+Metric: 'define metric' name=ID '{'
+        'semanticType' semantic_type=ID ';'
+        'kind' kind=METRIC_KIND ';'
+        'type' data_type=ID ';'
+    '}';
+
+METRIC_KIND: 'single-value' | 'series';
+
+Implementation: 'implementation' filename=STRING';' ;
+
+VirtualEnv: 'venv' requirements_file_path=STRING';' ;
+
+PythonVersion: 'python_version' python_version=STRING';' ;
+
+Parameter:
+    'define param' name=ID '{'
+        'type' type=ID ';'
+        'default' default=INT ';'
+        'range' '[' range_min=INT ',' range_max=INT ']' ';'
+    '}';
+
+Comment: /\/\/.*$/;
